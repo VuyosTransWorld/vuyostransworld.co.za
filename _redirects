@@ -1,0 +1,6 @@
+# Serve all gallery/product/fleet images through Netlify Image CDN.
+# This automatically negotiates a modern format (WebP/AVIF) per browser and
+# recompresses on the fly, so images download far smaller and appear faster.
+# The source files still live in /assets/* (videos and icons load from there
+# directly and are intentionally NOT routed through the image pipeline).
+/img/*  /.netlify/images?url=/assets/:splat&q=72  200
