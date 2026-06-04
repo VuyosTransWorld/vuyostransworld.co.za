@@ -8,11 +8,14 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0d1628" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#0d1628">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="format-detection" content="telephone=yes">
 
 <title>Vuyos Trans World — Vehicle Upholstery & Staff Transport | Cape Town</title>
 <meta name="description" content="Cape Town's premier vehicle upholstery. Custom seat covers, full interiors, floor mats. Staff transport. Khayelitsha-based.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -29,6 +32,12 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 @media(max-width:768px){input,textarea,select{font-size:16px}}
+/* Touch tablets using the desktop nav: enlarge tap targets to >=44px (mouse users keep slim nav) */
+@media (hover:none) and (pointer:coarse) and (min-width:901px){
+  .nLinks a,.nDropTrig{padding-top:15px!important;padding-bottom:15px!important}
+  .nDropMenu a{padding-top:13px!important;padding-bottom:13px!important}
+  .nHam{min-width:44px;min-height:44px}
+}
 body{font-family:'Poppins',sans-serif;background:#FAFAF8;color:#1B2A4A;overflow-x:hidden}
 
 /* CURSOR — desktop (fine pointer) only. Hidden on touch so phones keep native behaviour. */
@@ -91,8 +100,8 @@ body{font-family:'Poppins',sans-serif;background:#FAFAF8;color:#1B2A4A;overflow-
 #nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;transition:.5s}
 #nav.scrolled{background:rgba(8,12,20,.97);-webkit-backdrop-filter:blur(30px);backdrop-filter:blur(30px);border-bottom:1px solid var(--bdg);height:58px}
 .nLogo{display:flex;align-items:center;gap:11px;text-decoration:none;cursor:pointer}
-.nLogoImg{height:46px;width:auto;object-fit:contain;cursor:pointer;filter:none;transition:.3s}
-#nav.scrolled .nLogoImg{height:38px}
+.nLogoImg{height:23px;width:auto;object-fit:contain;cursor:pointer;filter:none;transition:.3s}
+#nav.scrolled .nLogoImg{height:19px}
 
 .nMark{width:38px;height:38px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .nMark svg{stroke:var(--gold);fill:none;width:17px;height:17px;stroke-width:1.5}
@@ -134,7 +143,7 @@ body{font-family:'Poppins',sans-serif;background:#FAFAF8;color:#1B2A4A;overflow-
 .page.active{display:block;opacity:1}
 
 /* ═══ HERO ═══ */
-#home{position:relative;height:100vh;height:100dvh;overflow:hidden;display:flex;align-items:flex-end}
+#home{position:relative;min-height:100vh;min-height:100dvh;overflow:hidden;display:flex;align-items:flex-end}
 .hVideoBg{position:absolute;inset:0;z-index:0}
 .hVideoBg video{width:100%;height:100%;object-fit:cover}
 /* Rotating slide images on top of video */
@@ -143,11 +152,11 @@ body{font-family:'Poppins',sans-serif;background:#FAFAF8;color:#1B2A4A;overflow-
 .hSlide.active{opacity:.35}
 .hOverlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(8,12,20,.9) 0%,rgba(8,12,20,.4) 55%,rgba(8,12,20,.15) 100%),linear-gradient(to top,rgba(8,12,20,.95) 0%,transparent 55%);z-index:2}
 .hGridLines{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.03) 1px,transparent 1px);background-size:80px 80px;z-index:2}
-.hContent{position:relative;z-index:3;width:100%;max-width:1400px;margin:0 auto;padding:0 48px 80px;display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:flex-end}
+.hContent{position:relative;z-index:3;width:100%;max-width:1400px;margin:0 auto;padding:calc(88px + env(safe-area-inset-top,0px)) 48px 80px;display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:flex-end}
 .hEye{display:flex;align-items:center;gap:14px;margin-bottom:24px}
 .hEye::before{content:'';width:36px;height:1px;background:var(--gold)}
 .hEye span{font-size:9px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
-.hH1{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,6.5vw,108px);font-weight:300;line-height:.9;letter-spacing:-2px;color:#fff;margin-bottom:6px}
+.hH1{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,5.6vw,94px);font-weight:300;line-height:.92;letter-spacing:-2px;color:#fff;margin-bottom:6px}
 .hH1 em{color:var(--gold);font-style:italic}
 .hSub{font-size:14px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.8;max-width:500px;margin-bottom:40px}
 .hBtns{display:flex;gap:12px;margin-bottom:52px;flex-wrap:wrap}
@@ -203,7 +212,8 @@ body{font-family:'Poppins',sans-serif;background:#FAFAF8;color:#1B2A4A;overflow-
 .elImgSlide.on{opacity:1}
 .elImgSlide img{width:100%;height:100%;object-fit:cover}
 .elImgDots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2}
-.elDot{width:20px;height:2px;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer}
+.elDot{width:20px;height:2px;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;position:relative}
+.elDot::before{content:"";position:absolute;top:-21px;bottom:-21px;left:-12px;right:-12px}
 .elDot.on{background:var(--gold);width:32px}
 
 .elInfo{background:var(--black);padding:64px 56px;display:flex;flex-direction:column;justify-content:center}
@@ -212,11 +222,13 @@ body{font-family:'Poppins',sans-serif;background:#FAFAF8;color:#1B2A4A;overflow-
 .elTitle{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3vw,52px);font-weight:300;color:#fff;line-height:1;margin-bottom:8px}
 .elSub{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,1.8vw,26px);font-weight:300;font-style:italic;color:var(--gold);margin-bottom:24px}
 .elDesc{font-size:13px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.9;margin-bottom:36px;max-width:380px}
-.elActions{display:flex;gap:12px;align-items:center}
+.elActions{display:flex;gap:12px 16px;align-items:center;flex-wrap:wrap}
 .elViewBtn{padding:13px 28px;background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:.3s}
 .elViewBtn:hover{background:var(--gold);color:var(--navy2)}
 .elMoreBtn{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);cursor:pointer;transition:.2s;font-weight:500}
 .elMoreBtn:hover{color:#fff}
+.elProc{color:var(--gold)!important;font-weight:600}
+.elProc:hover{color:#fff!important;text-decoration:underline}
 .elFooter{max-width:1400px;margin:0 auto;padding:40px 48px;border-top:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
 .elFooter p{font-size:12px;font-weight:300;color:rgba(255,255,255,.28)}
 
@@ -450,7 +462,7 @@ footer{background:#030508;border-top:1px solid var(--bdr);padding:60px 48px 30px
 .ftBot{border-top:1px solid var(--bdr);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .ftBot p{font-size:10px;font-weight:300;color:rgba(255,255,255,.15);letter-spacing:.5px}
 .ftBot a{color:var(--gold);text-decoration:none}
-.waF{position:fixed;bottom:24px;right:24px;z-index:500;width:50px;height:50px;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(37,211,102,.3);text-decoration:none;transition:.3s}
+.waF{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom,0px));right:calc(24px + env(safe-area-inset-right,0px));z-index:500;width:50px;height:50px;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(37,211,102,.3);text-decoration:none;transition:.3s}
 .waF:hover{transform:scale(1.1);box-shadow:0 12px 38px rgba(37,211,102,.4)}
 .waF svg{fill:#fff;width:22px;height:22px}
 
@@ -503,7 +515,7 @@ footer{background:#030508;border-top:1px solid var(--bdr);padding:60px 48px 30px
 .nDropTrig{font-size:13px!important;letter-spacing:1px!important}
 .nDropMenu a{font-size:12px!important}
 .nCta{font-size:12px!important;padding:11px 24px!important}
-.hSub{font-size:17px!important;line-height:1.85!important}
+.hSub{font-size:15px!important;line-height:1.75!important}
 .hmL{font-size:11px!important;color:rgba(255,255,255,.35)!important;letter-spacing:1.5px!important}
 .mqi{font-size:11px!important}
 .sEye span,.hEye span{font-size:11px!important}
@@ -1340,7 +1352,7 @@ body{background:var(--bg);color:var(--navy)}
 .nDropTrig{font-size:13px!important;letter-spacing:1px!important}
 .nDropMenu a{font-size:12px!important}
 .nCta{font-size:12px!important;padding:11px 24px!important}
-.hSub{font-size:17px!important;line-height:1.85!important}
+.hSub{font-size:15px!important;line-height:1.75!important}
 .hmL{font-size:11px!important;color:rgba(255,255,255,.35)!important;letter-spacing:1.5px!important}
 .mqi{font-size:11px!important}
 .sEye span,.hEye span{font-size:11px!important}
@@ -1989,10 +2001,10 @@ footer{
   #nav{height:58px!important}
   .nHam{width:44px!important;height:44px!important;justify-content:center!important;cursor:pointer;flex:0 0 auto}
   .nLogo{flex:0 1 auto;min-width:0;overflow:hidden}
-  .nLogoImg{height:24px!important;max-width:60vw;width:auto}
+  .nLogoImg{height:14px!important;max-width:60vw;width:auto}
 }
 @media(max-width:380px){
-  .nLogoImg{height:21px!important;max-width:58vw}
+  .nLogoImg{height:12px!important;max-width:58vw}
 }
 /* Mobile menu — world class */
 #mob{
@@ -2303,7 +2315,7 @@ footer{
 .cp-logo::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.2),transparent)}
 .cp-lbar{width:1px;height:44px;background:linear-gradient(var(--gold),transparent);opacity:0;transition:opacity .8s 1.8s,height .8s 1.8s}
 .cp-lbar.v{opacity:1}
-.cp-limg{height:clamp(88px,13vw,150px);width:auto;object-fit:contain;opacity:0;transform:scale(.86);transition:opacity 1.2s 2.1s,transform 1.2s 2.1s}
+.cp-limg{height:clamp(29px,4.3vw,50px);width:auto;object-fit:contain;opacity:0;transform:scale(.86);transition:opacity 1.2s 2.1s,transform 1.2s 2.1s}
 .cp-limg.v{opacity:.95;transform:scale(1)}
 .cp-lname{font-size:10px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.15);opacity:0;transition:opacity .8s 2.9s}
 .cp-lname.v{opacity:1}
@@ -2510,7 +2522,7 @@ footer{
 <!-- NAV -->
 <nav id="nav">
   <div class="nLogo" onclick="goPage('home')">
-    <img src="assets/logo-light.png" alt="Vuyos Trans World" class="nLogoImg" loading="lazy" decoding="async">
+    <img src="assets/logo-light.png" alt="Vuyos Trans World" class="nLogoImg" decoding="async" fetchpriority="high" width="1421" height="145">
   </div>
   <div class="nLinks">
     <a id="nHome" class="active" onclick="goPage('home')">Home</a>
@@ -2534,7 +2546,7 @@ footer{
   </div>
   <div class="nRight">
     <a class="nCta" href="https://wa.me/27691283488" target="_blank" rel="noopener">Get a Quote</a>
-    <div class="nHam" onclick="toggleMob()" role="button" tabindex="0" aria-label="Open navigation menu"><span></span><span></span><span></span></div>
+    <div class="nHam" onclick="toggleMob()" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></div>
   </div>
 </nav>
 
@@ -2635,7 +2647,7 @@ footer{
       </div>
       <div class="transRight">
         <div class="transImg">
-          <img src="assets/img_1ebba49fef.jpg" alt="VTW 7-Seater Staff Transport" loading="lazy" decoding="async">
+          <img src="assets/img_1ebba49fef.jpg" alt="VTW 7-Seater Staff Transport" loading="lazy" decoding="async" width="675" height="900">
           <div class="transImgLabel"><span>VTW Fleet — 7-Seater Staff Transport</span></div>
         </div>
       </div>
@@ -2643,6 +2655,131 @@ footer{
   </section>
 
 
+
+  <!-- REVIEWS -->
+  <section id="reviewsHome">
+    <div class="cwHead">
+      <div class="sEye" style="justify-content:center"><span>Our Community</span></div>
+      <h2 class="sH2" style="text-align:center">We&rsquo;re building a <em>community</em></h2>
+      <p class="sSub" style="margin:0 auto;text-align:center">Growing the community across South Africa &mdash; names &amp; prices hidden for privacy. Tap any comment to read it.</p>
+    </div>
+    <div class="cmRows">
+      <div class="cmRow"><div class="cmTrack cmLeft">
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-01.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-02.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-03.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-04.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-05.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-06.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-07.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-08.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-09.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-10.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-11.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-12.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-13.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-14.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-15.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-16.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-17.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-18.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-19.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-20.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-21.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-22.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-23.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-24.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-25.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-26.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-27.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-28.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-01.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-02.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-03.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-04.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-05.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-06.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-07.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-08.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-09.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-10.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-11.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-12.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-13.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-14.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-15.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-16.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-17.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-18.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-19.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-20.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-21.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-22.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-23.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-24.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-25.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-26.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-27.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-28.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+      </div></div>
+      <div class="cmRow"><div class="cmTrack cmRight">
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-29.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-30.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-31.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-32.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-33.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-34.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-35.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-36.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-37.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-38.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-39.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-40.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-41.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-42.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-43.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-44.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-45.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-46.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-47.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-48.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-49.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-50.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-51.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-52.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-53.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-54.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-55.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-29.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-30.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-31.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-32.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-33.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-34.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-35.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-36.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-37.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-38.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-39.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-40.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-41.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-42.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-43.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-44.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-45.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-46.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-47.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-48.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-49.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-50.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-51.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-52.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-53.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-54.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-55.jpg" alt="Community comment" loading="lazy" decoding="async" width="420" height="423"></div>
+      </div></div>
+    </div>
+  </section>
 
   <!-- ABOUT -->
   <section id="aboutSnippet">
@@ -2663,145 +2800,8 @@ footer{
   </div>
 </section>
 
-  <!-- REVIEWS -->
-  <section id="reviewsHome">
-    <div class="cwHead">
-      <div class="sEye" style="justify-content:center"><span>Our Community</span></div>
-      <h2 class="sH2" style="text-align:center">We&rsquo;re building a <em>community</em></h2>
-      <p class="sSub" style="margin:0 auto;text-align:center">Real comments from a growing community of taxi owners across South Africa &mdash; names &amp; prices hidden for privacy. Tap any comment to read it.</p>
-    </div>
-    <div class="cmRows">
-      <div class="cmRow"><div class="cmTrack cmLeft">
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-01.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-02.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-03.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-04.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-05.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-06.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-07.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-08.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-09.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-10.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-11.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-12.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-13.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-14.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-15.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-16.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-17.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-18.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-19.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-20.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-21.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-22.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-23.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-24.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-25.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-26.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-27.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-28.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-01.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-02.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-03.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-04.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-05.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-06.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-07.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-08.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-09.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-10.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-11.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-12.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-13.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-14.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-15.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-16.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-17.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-18.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-19.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-20.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-21.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-22.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-23.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-24.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-25.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-26.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-27.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-28.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-      </div></div>
-      <div class="cmRow"><div class="cmTrack cmRight">
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-29.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-30.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-31.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-32.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-33.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-34.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-35.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-36.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-37.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-38.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-39.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-40.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-41.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-42.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-43.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-44.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-45.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-46.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-47.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-48.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-49.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-50.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-51.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-52.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-53.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-54.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-55.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-29.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-30.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-31.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-32.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-33.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-34.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-35.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-36.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-37.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-38.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-39.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-40.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-41.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-42.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-43.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-44.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-45.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-46.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-47.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-48.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-49.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-50.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-51.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-52.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-53.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-54.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-        <div class="cmCard" onclick="openSbImg(this)"><img src="assets/community-55.jpg" alt="Community comment" loading="lazy" decoding="async"></div>
-      </div></div>
-    </div>
-  </section>
-
   <!-- PROCESS -->
-  <section id="processHome">
-    <div style="max-width:1400px;margin:0 auto;text-align:center">
-      <div class="sEye rev" style="justify-content:center"><span>How It Works</span></div>
-      <h2 class="sH2 rev" style="text-align:center">The VTW <em>Process</em></h2>
-      <div class="pList">
-        <div class="ps rev"><div class="psN">01</div><h4>Consultation</h4><p>WhatsApp photos of your vehicle. Tell us your colour preferences. Same-day response.</p><div class="psLine"></div></div>
-        <div class="ps rev rd1"><div class="psN">02</div><h4>Quotation</h4><p>Detailed competitive quote within 24 hours. No hidden costs.</p><div class="psLine"></div></div>
-        <div class="ps rev rd2"><div class="psN">03</div><h4>Manufacturing</h4><p>Custom cut and sewn in our Khayelitsha workshop — even without existing templates.</p><div class="psLine"></div></div>
-        <div class="ps rev rd3" style="border-right:none"><div class="psN">04</div><h4>Installation</h4><p>Professional fitting. Perfect alignment, tension, and finish every time.</p><div class="psLine"></div></div>
-
-      </div>
-    </div>
-  </section>
+  <!-- home process section removed per request — see Upholstery > Our Process page -->
 
   <!-- IMPACT -->
   <section id="impactHome">
@@ -2822,7 +2822,7 @@ footer{
   <div style="max-width:1400px;margin:0 auto;padding:0 max(22px,env(safe-area-inset-left,22px))">
     <!-- Logo -->
     <div style="margin-bottom:32px;text-align:center">
-      <img src="assets/logo-light.png" alt="Vuyos Trans World" style="height:40px;width:auto;object-fit:contain;opacity:.9" loading="lazy" decoding="async">
+      <img src="assets/logo-light.png" alt="Vuyos Trans World" style="height:20px;width:auto;object-fit:contain;opacity:.9" loading="lazy" decoding="async" width="1421" height="145">
     </div>
     <!-- Contact grid -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">
@@ -2852,7 +2852,7 @@ footer{
     <div class="ftIn">
       <div class="ftTop">
         <div class="ftBrand">
-          <div class="ftLogo"><img src="assets/logo-light.png" alt="Vuyos Trans World" style="height:32px;width:auto;object-fit:contain;opacity:.92" loading="lazy" decoding="async"></div>
+          <div class="ftLogo"><img src="assets/logo-light.png" alt="Vuyos Trans World" style="height:18px;width:auto;object-fit:contain;opacity:.92" loading="lazy" decoding="async" width="1421" height="145"></div>
           <p>Cape Town's premier vehicle upholstery manufacturer and staff transport operator. Built in Khayelitsha. Serving the Western Cape.</p>
         </div>
         <div class="ftCol"><h4>Upholstery</h4><ul>
@@ -3173,7 +3173,7 @@ footer{
 .nDropTrig{font-size:13px!important;letter-spacing:1px!important}
 .nDropMenu a{font-size:12px!important}
 .nCta{font-size:12px!important;padding:11px 24px!important}
-.hSub{font-size:17px!important;line-height:1.85!important}
+.hSub{font-size:15px!important;line-height:1.75!important}
 .hmL{font-size:11px!important;color:rgba(255,255,255,.35)!important;letter-spacing:1.5px!important}
 .mqi{font-size:11px!important}
 .sEye span,.hEye span{font-size:11px!important}
@@ -3783,6 +3783,26 @@ a.cta-val:hover{color:var(--gold)}
 .tSec [style*="rgba(27"]{color:rgba(255,255,255,.6)!important}
 .tSec [style*="navy"]{color:#fff!important}
 
+
+/* === MOBILE HERO FIT (authoritative, last in cascade) === */
+@media(max-width:600px){
+  #home .hContent{padding-top:calc(78px + env(safe-area-inset-top,0px))!important}
+  #home .hEye{margin-bottom:14px!important}
+  #home .hEye span{font-size:10px!important;letter-spacing:3px!important}
+  #home .hH1{font-size:clamp(34px,9.6vw,44px)!important;line-height:.98!important;letter-spacing:-.6px!important;margin-bottom:13px!important}
+  #home .hSub{font-size:14.5px!important;line-height:1.7!important;margin-bottom:24px!important}
+  #home .hMetrics{margin-top:6px}
+}
+@media(max-width:380px){
+  #home .hH1{font-size:37px!important}
+  #home .hContent{padding-top:calc(72px + env(safe-area-inset-top,0px))!important}
+}
+
+/* Contact page: stack social links vertically on phones */
+@media(max-width:600px){
+  #cpSoc .cp-socs{display:flex!important;flex-direction:column!important;gap:10px!important;width:100%}
+  #cpSoc .cp-socs .cp-s{width:100%!important;justify-content:center!important}
+}
 </style>
 
   <!-- SECTION 1: HERO -->
@@ -3990,12 +4010,12 @@ a.cta-val:hover{color:var(--gold)}
             <div class="tFormTitle">Transport Quote Request</div>
             <div id="tFormBody">
               <div class="tFormGrid">
-                <div class="tFormF"><label>Company Name</label><input id="tCom" type="text" placeholder="Your company"></div>
-                <div class="tFormF"><label>Your Name</label><input id="tNm" type="text" placeholder="Your name"></div>
-                <div class="tFormF"><label>Contact Number</label><input id="tPh" type="text" placeholder="069..."></div>
-                <div class="tFormF"><label>Email Address</label><input id="tEm" type="email" placeholder="email@company.co.za"></div>
-                <div class="tFormFull tFormF"><label>Workplace Address</label><input id="tWA" type="text" placeholder="Where staff need to be transported to"></div>
-                <div class="tFormF"><label>Number of Staff</label><input id="tSC" type="text" placeholder="Rough estimate is fine"></div>
+                <div class="tFormF"><label for="tCom">Company Name</label><input id="tCom" type="text" placeholder="Your company"></div>
+                <div class="tFormF"><label for="tNm">Your Name</label><input id="tNm" type="text" placeholder="Your name"></div>
+                <div class="tFormF"><label for="tPh">Contact Number</label><input id="tPh" type="text" placeholder="069..."></div>
+                <div class="tFormF"><label for="tEm">Email Address</label><input id="tEm" type="email" placeholder="email@company.co.za"></div>
+                <div class="tFormFull tFormF"><label for="tWA">Workplace Address</label><input id="tWA" type="text" placeholder="Where staff need to be transported to"></div>
+                <div class="tFormF"><label for="tSC">Number of Staff</label><input id="tSC" type="text" placeholder="Rough estimate is fine"></div>
                 <div class="tFormF"><label>How Did You Hear About Us?</label>
                   <select id="tSrc"><option value="">Select...</option><option>Google</option><option>TikTok</option><option>Instagram</option><option>WhatsApp</option><option>Referral</option><option>Other</option></select>
                 </div>
@@ -4019,7 +4039,7 @@ a.cta-val:hover{color:var(--gold)}
     <div class="ftIn">
       <div class="ftTop">
         <div class="ftBrand">
-          <div class="ftLogo"><img src="assets/logo-light.png" alt="Vuyos Trans World" style="height:32px;width:auto;object-fit:contain;opacity:.92" loading="lazy" decoding="async"></div>
+          <div class="ftLogo"><img src="assets/logo-light.png" alt="Vuyos Trans World" style="height:18px;width:auto;object-fit:contain;opacity:.92" loading="lazy" decoding="async" width="1421" height="145"></div>
           <p>Khayelitsha-based staff transport and vehicle upholstery. Reliable. Accountable. Every. Single. Day.</p>
         </div>
         <div class="ftCol"><h4>Transport</h4><ul>
@@ -4199,7 +4219,7 @@ const navIds={
 };
 let currentPage='home';
 
-function goPage(p){
+function goPage(p,fromPop){
   // Hide all pages cleanly
   ['pageHome','pageSeat','pageFull','pageMats','pageSW','pageUphol','pageTrans','pageAbout','pageContact'].forEach(function(id){
     var el=document.getElementById(id);
@@ -4233,7 +4253,10 @@ function goPage(p){
     if(nav){ p==='home'?nav.classList.remove('scrolled'):nav.classList.add('scrolled'); }
   }
   var navEl=document.getElementById(navIds[p]);if(navEl) navEl.classList.add('active');
+  if(!fromPop){try{history.pushState({vtwPage:p},'','#'+p);}catch(e){}}
 }
+window.addEventListener('popstate',function(e){var p=(e.state&&e.state.vtwPage)||'home';if(typeof goPage==='function')goPage(p,true);});
+window.addEventListener('load',function(){try{var hs=(location.hash||'').replace('#','');if(hs&&typeof pages!=='undefined'&&pages[hs]){history.replaceState({vtwPage:hs},'','#'+hs);goPage(hs,true);}else{history.replaceState({vtwPage:'home'},'',location.pathname+location.search);}}catch(e){}});
 
 // ═══ HERO ROTATING SLIDES ═══
 let slideIdx=0;
@@ -4280,6 +4303,7 @@ function renderElite(){
         <div class="elActions">
           <button class="elViewBtn" onclick="openPD_elite('${p.id}',event)">View Full Detail</button>
           <span class="elMoreBtn" onclick="goPage('${p.page}');event.stopPropagation()">See all ${p.page==='seat_covers'?'seat covers':'interiors'} →</span>
+          <span class="elMoreBtn elProc" onclick="goPage('upholstery');event.stopPropagation()">Our ordering process →</span>
         </div>
       </div>
     </div>`;
@@ -4412,7 +4436,7 @@ if(FINE_POINTER){
 // Nav
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
 let mobOpen=false;
-function toggleMob(){mobOpen=!mobOpen;document.getElementById('mob').classList.toggle('open',mobOpen);}
+function toggleMob(){mobOpen=!mobOpen;document.getElementById('mob').classList.toggle('open',mobOpen);var hb=document.querySelector('.nHam');if(hb)hb.setAttribute('aria-expanded',mobOpen);}
 function closeMob(){mobOpen=false;document.getElementById('mob').classList.remove('open');}
 
 // Reveals
@@ -4702,7 +4726,7 @@ document.addEventListener('click',function(e){
 
   <!-- HERO -->
   <div class="cph">
-    <div class="cph-bg"><img src="assets/img_e4ef69888b.jpg" alt="VTW Staff Transport" loading="eager" decoding="async"></div>
+    <div class="cph-bg"><img src="assets/img_e4ef69888b.jpg" alt="VTW Staff Transport" loading="eager" decoding="async" width="1050" height="1400"></div>
     <div class="cph-ovl"></div>
     <div class="cph-grid"></div>
     <div class="cph-scan"></div>
@@ -4815,13 +4839,13 @@ document.addEventListener('click',function(e){
       <h4>Or fill in the form below</h4>
       <div id="cpFBody">
         <div class="cpfi-2">
-          <div class="cpfi"><label>Your Name</label><input id="cpfN" type="text" placeholder="First name" autocomplete="given-name"></div>
-          <div class="cpfi"><label>Phone / WhatsApp</label><input id="cpfP" type="tel" placeholder="069 128 3488" autocomplete="tel"></div>
+          <div class="cpfi"><label for="cpfN">Your Name</label><input id="cpfN" type="text" placeholder="First name" autocomplete="given-name"></div>
+          <div class="cpfi"><label for="cpfP">Phone / WhatsApp</label><input id="cpfP" type="tel" placeholder="069 128 3488" autocomplete="tel"></div>
         </div>
         <div class="cpfi"><label>Service Needed</label>
           <select id="cpfSv"><option value="">Select...</option><option>Seat Covers</option><option>Floor Mats</option><option>Steering Wheel Cover</option><option>Full Interior Upholstery</option><option>Staff Transport</option><option>Other / General Enquiry</option></select>
         </div>
-        <div class="cpfi"><label>Vehicle / Company</label><input id="cpfV" type="text" placeholder="e.g. Toyota Quantum, Company ABC..." autocomplete="organization"></div>
+        <div class="cpfi"><label for="cpfV">Vehicle / Company</label><input id="cpfV" type="text" placeholder="e.g. Toyota Quantum, Company ABC..." autocomplete="organization"></div>
         <div class="cpfi"><label>Your Message</label><textarea id="cpfM" placeholder="Tell us about your requirements..."></textarea></div>
         <div class="cp-fbtns">
           <button class="cp-fb primary" onclick="submitCPForm()">Send via WhatsApp</button>
@@ -4839,7 +4863,7 @@ document.addEventListener('click',function(e){
   <!-- LOGO REVEAL -->
   <div class="cp-logo" id="cpLogoWrap">
     <div class="cp-lbar" id="cpLbar"></div>
-    <img class="cp-limg" id="cpLimg" src="assets/logo-light.png" alt="Vuyos Trans World" loading="lazy" decoding="async">
+    <img class="cp-limg" id="cpLimg" src="assets/logo-light.png" alt="Vuyos Trans World" loading="lazy" decoding="async" width="1421" height="145">
     <div class="cp-lname" id="cpLname">Vuyos Trans World</div>
     <div class="cp-ldom" id="cpLdom">vuyostransworld.co.za</div>
   </div>
@@ -4854,5 +4878,15 @@ document.addEventListener('click',function(e){
   </div>
 </div>
 
+<script>if("serviceWorker"in navigator){addEventListener("load",function(){navigator.serviceWorker.register("/service-worker.js").catch(function(){})})}</script>
+<script>
+/* Self-heal community images: if one fails (stale cache / dying SW), retry once from network */
+addEventListener('error',function(e){
+  var t=e.target;
+  if(t&&t.tagName==='IMG'&&/\/community-\d+\.jpg/.test(t.src)&&!t.dataset.vtwR){
+    t.dataset.vtwR='1';t.src=t.src.split('?')[0]+'?r='+Date.now();
+  }
+},true);
+</script>
 </body>
 </html>
