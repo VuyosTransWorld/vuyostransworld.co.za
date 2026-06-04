@@ -1,5 +1,5 @@
 /* Vuyos Trans World — service worker. Bump CACHE on each release to refresh. */
-const CACHE = 'vtw-cache-v1';
+const CACHE = 'vtw-cache-v2';
 const CORE = ['/', '/index.html', '/assets/logo-light.png', '/manifest.json'];
 
 self.addEventListener('install', e => {
