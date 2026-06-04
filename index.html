@@ -2,6 +2,33 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Self-heal for returning visitors: an earlier build registered a service
+   worker that cached /assets/* and could keep showing stale content (e.g. the
+   community screenshots never appeared). The moment this fresh page loads we
+   actively unregister any leftover worker and purge its caches on the main
+   thread, so the visitor sees current content without a manual hard refresh. */
+(function(){
+  try{
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.getRegistrations().then(function(rs){
+        var had=rs.length>0;
+        rs.forEach(function(r){r.unregister();});
+        if(had && window.caches && caches.keys){
+          caches.keys().then(function(keys){
+            return Promise.all(keys.map(function(k){return caches.delete(k);}));
+          }).then(function(){
+            if(!sessionStorage.getItem('vtwSwPurged')){
+              sessionStorage.setItem('vtwSwPurged','1');
+              location.reload();
+            }
+          });
+        }
+      }).catch(function(){});
+    }
+  }catch(e){}
+})();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -4473,6 +4500,26 @@ function openSbImg(el){
   document.body.appendChild(ov);
 }
 function openSbFam(el){openSbImg(el);}
+
+/* Community gallery self-recovery: if a screenshot fails to load (e.g. a
+   stale HTTP cache or a service worker still being torn down returns an
+   error for an asset added after it cached the site), retry it once straight
+   from the network with a cache-busting URL so the image still appears
+   instead of showing a broken-image placeholder. */
+(function(){
+  function recover(img){
+    if(img.dataset.retried) return;       // only one retry, no loops
+    img.dataset.retried='1';
+    var base=img.getAttribute('src').split('?')[0];
+    img.src=base+'?r='+Date.now();        // fresh URL bypasses cache/old worker
+  }
+  var imgs=document.querySelectorAll('.cmCard img');
+  imgs.forEach(function(img){
+    img.addEventListener('error',function(){recover(img);});
+    // Cover images that already errored before this handler attached.
+    if(img.complete && img.naturalWidth===0) recover(img);
+  });
+})();
 // goPage unified above
 
 
