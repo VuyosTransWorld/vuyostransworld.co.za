@@ -4500,6 +4500,26 @@ function openSbImg(el){
   document.body.appendChild(ov);
 }
 function openSbFam(el){openSbImg(el);}
+
+/* Community gallery self-recovery: if a screenshot fails to load (e.g. a
+   stale HTTP cache or a service worker still being torn down returns an
+   error for an asset added after it cached the site), retry it once straight
+   from the network with a cache-busting URL so the image still appears
+   instead of showing a broken-image placeholder. */
+(function(){
+  function recover(img){
+    if(img.dataset.retried) return;       // only one retry, no loops
+    img.dataset.retried='1';
+    var base=img.getAttribute('src').split('?')[0];
+    img.src=base+'?r='+Date.now();        // fresh URL bypasses cache/old worker
+  }
+  var imgs=document.querySelectorAll('.cmCard img');
+  imgs.forEach(function(img){
+    img.addEventListener('error',function(){recover(img);});
+    // Cover images that already errored before this handler attached.
+    if(img.complete && img.naturalWidth===0) recover(img);
+  });
+})();
 // goPage unified above
 
 
