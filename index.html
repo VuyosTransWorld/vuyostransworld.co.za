@@ -2,6 +2,33 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Self-heal for returning visitors: an earlier build registered a service
+   worker that cached /assets/* and could keep showing stale content (e.g. the
+   community screenshots never appeared). The moment this fresh page loads we
+   actively unregister any leftover worker and purge its caches on the main
+   thread, so the visitor sees current content without a manual hard refresh. */
+(function(){
+  try{
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.getRegistrations().then(function(rs){
+        var had=rs.length>0;
+        rs.forEach(function(r){r.unregister();});
+        if(had && window.caches && caches.keys){
+          caches.keys().then(function(keys){
+            return Promise.all(keys.map(function(k){return caches.delete(k);}));
+          }).then(function(){
+            if(!sessionStorage.getItem('vtwSwPurged')){
+              sessionStorage.setItem('vtwSwPurged','1');
+              location.reload();
+            }
+          });
+        }
+      }).catch(function(){});
+    }
+  }catch(e){}
+})();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
